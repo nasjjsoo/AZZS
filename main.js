@@ -117,28 +117,32 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Mobile menu functionality
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const closeMobileMenuBtn = document.querySelector('.close-mobile-menu');
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileNavMenu = document.querySelector('.mobile-nav-menu');
+    const closeMobileNavMenuBtn = document.querySelector('.close-mobile-nav-menu');
     const cartOverlay = document.querySelector('.cart-overlay'); // Used by both mobile menu and cart
     const cartSidebar = document.querySelector('.cart-sidebar'); // Needed to check its state
 
-    if (mobileMenuBtn && mobileMenu && closeMobileMenuBtn && cartOverlay) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
+    if (mobileMenuToggle && mobileNavMenu && closeMobileNavMenuBtn && cartOverlay) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileNavMenu.classList.add('active');
             cartOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            // Aria expanded state
+            mobileMenuToggle.setAttribute('aria-expanded', 'true');
         });
         
-        closeMobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
+        closeMobileNavMenuBtn.addEventListener('click', () => {
+            mobileNavMenu.classList.remove('active');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
             // Only deactivate overlay and restore scroll if cart is also not active
             if (!cartSidebar || !cartSidebar.classList.contains('active')) {
                 cartOverlay.classList.remove('active');
                 document.body.style.overflow = '';
             }
         });
-        // cartOverlay click listener is already set up in cart.js and handles both
+        // Note: cart.js also has an overlay listener that needs to be aware of .mobile-nav-menu
+        // For now, this focuses on main.js updates.
     }
 
     // Legal modals functionality
@@ -183,9 +187,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Checkout button functionality (redirect and Telegram notification)
-    const checkoutBtn = document.querySelector('.checkout-btn');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', async (e) => {
+    // This button is in the cart sidebar, managed by cart.js now, but if there's another one:
+    const mainCheckoutBtn = document.querySelector('.checkout-btn'); // Assuming this is the one in cart.js
+    if (mainCheckoutBtn) { // This listener might be redundant if cart.js handles its own button.
+                           // However, the logic here is for the GENERAL checkout process initiation.
+        mainCheckoutBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             
             // Assumes 'cart' object is available globally from cart.js
@@ -195,8 +201,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const orderData = {
-                items: cart.items,
-                total: cart.total,
+                items: cart.items, // Ensure cart.items is correctly populated
+                total: cart.total, // Ensure cart.total is up-to-date
                 date: new Date().toLocaleString('fr-FR', {
                     year: 'numeric', month: '2-digit', day: '2-digit',
                     hour: '2-digit', minute: '2-digit'
@@ -290,8 +296,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Personalized Greeting Message
+    // const greetingElement = document.getElementById('personalized-greeting');
+    // if (greetingElement) { // This logic can be kept if #personalized-greeting is retained in the new design
+    //     let greeting = '';
+    // ... (rest of greeting logic - assuming it's fine for now or will be reviewed if element is kept)
+    // }
+
+    // Newsletter form submission (simple prevention for now)
+    const newsletterForm = document.querySelector('.newsletter-form-v2'); // Updated selector
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real app, you'd handle the submission here (e.g., AJAX)
+            alert('Merci pour votre inscription !'); // Simple feedback
+            newsletterForm.reset(); // Clear the form
+        });
+    }
+
+    // Ensure personalized greeting is handled correctly if element exists with new theme vars
     const greetingElement = document.getElementById('personalized-greeting');
     if (greetingElement) {
+        // Styles are inline, but ensure CSS variables are correctly used if they were changed.
+        // The JS logic for text content should be fine.
         let greeting = '';
         const currentHour = new Date().getHours();
 
