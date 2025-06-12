@@ -10,67 +10,46 @@
 </head>
 <body>
     <div id="scroll-progress-bar"></div>
-    <!-- Enhanced Top Bar -->
-    <div class="top-bar">
-        <div class="top-bar-container container">
-            <div class="top-bar-message">
-                Livraison offerte à partir de 40€ d'achat <strong>Découvrir</strong>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo-area">
+                <a href="index.html" class="logo">réglo<span>.</span></a>
             </div>
-            <div class="top-bar-links">
-                <a href="javascript:void(0);" class="legal-link" data-type="terms">Conditions générales</a>
-                <a href="javascript:void(0);" class="legal-link" data-type="privacy">Politique de confidentialité</a>
-                <a href="javascript:void(0);" class="legal-link" data-type="refund">Politique de remboursement</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Enhanced Navigation -->
-    <nav class="navbar container">
-        <button class="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="mobile-menu">
-            <div class="mobile-menu-header">
-                <div class="logo">réglo<span>.fr</span></div>
-                <button class="close-mobile-menu">
-                    <i class="fas fa-times"></i>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
                 </button>
-            </div>
-            <div class="mobile-menu-links">
-                <ul>
+                <ul class="nav-links-desktop">
                     <li><a href="#">Pour chien</a></li>
                     <li><a href="#">Bien choisir</a></li>
                     <li><a href="#">Notre mission</a></li>
-                    <li><a href="#">Ils parlent de nous</a></li>
-                    <li><a href="#">Informations pratiques</a></li>
                 </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="#" aria-label="Account"><i class="fas fa-user"></i></a>
+                <a href="#" id="cart-icon-header" aria-label="Cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count-header" class="cart-count">0</span>
+                </a>
             </div>
-            <div class="mobile-menu-footer">
-                <div class="mobile-menu-footer-links">
-                    <a href="javascript:void(0);" class="legal-link" data-type="terms">Conditions</a>
-                    <a href="javascript:void(0);" class="legal-link" data-type="privacy">Confidentialité</a>
-                    <a href="javascript:void(0);" class="legal-link" data-type="refund">Remboursement</a>
-                </div>
-            </div>
         </div>
-        <div class="logo">réglo<span>.</span></div>
-        <div class="nav-links">
-            <a href="#">Pour chien</a>
-            <a href="#">Bien choisir</a>
-            <a href="#">Notre mission</a>
-            <a href="#">Ils parlent de nous</a>
-            <a href="#">Informations pratiques</a>
+        <div class="mobile-nav-menu"> 
+            <button class="close-mobile-nav-menu" aria-label="Close menu">&times;</button>
+             <ul>
+                <li><a href="#">Pour chien</a></li>
+                <li><a href="#">Bien choisir</a></li>
+                <li><a href="#">Notre mission</a></li>
+                <li><a href="#">Ils parlent de nous</a></li>
+                <li><a href="#">Informations pratiques</a></li>
+                <hr>
+                <li><a href="javascript:void(0);" class="legal-link" data-type="terms">Conditions</a></li>
+                <li><a href="javascript:void(0);" class="legal-link" data-type="privacy">Confidentialité</a></li>
+                <li><a href="javascript:void(0);" class="legal-link" data-type="refund">Remboursement</a></li>
+            </ul>
         </div>
-        <div class="nav-icons">
-            <a href="#"><i class="fas fa-user"></i></a>
-            <a href="#" id="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-count" class="cart-count hidden">0</span>
-            </a>
-        </div>
-    </nav>
+    </header>
 
-    <div id="personalized-greeting" style="text-align: center; padding: 10px 20px; background-color: var(--light-gray); color: var(--dark); font-size: 16px; font-weight: 500; margin-bottom: 0; display: none;"></div>
+    <div id="personalized-greeting" style="text-align: center; padding: 10px 20px; background-color: var(--light-background); color: var(--dark-text); font-size: 16px; font-weight: 500; margin-bottom: 0; display: none;"></div>
 
     <!-- Legal Modals -->
     <div class="legal-modal" id="terms-modal">
@@ -170,17 +149,12 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="hero main-page-section">
+    <section class="hero-section">
         <div class="container">
-            <p class="badge">-40€ sur votre 1ère commande </p>
-            <p class="badge">Fabriquées en France 🇫🇷</p>
-            <h1>Les croquettes pour aider votre chien qui <span>se gratte</span></h1>
-            <ul>
-                <li>Efficace contre les allergies</li>
-                <li>Respecte le régime carnivore</li>
-                <li>Formulation vétérinaire</li>
-            </ul>
-            <a href="#products" class="btn btn-primary">DÉCOUVRIR LA GAMME</a>
+            <h1>Nourriture <span>saine</span> pour chien heureux.</h1>
+            <p class="subtitle">Croquettes hypoallergéniques de qualité vétérinaire, fabriquées en France.</p>
+            <a href="#products" class="btn btn-primary btn-large">Découvrir nos produits</a>
+            <!-- Optional: Add a background image via CSS -->
         </div>
     </section>
 
@@ -191,278 +165,215 @@
             <p>Des produits de qualité fabriqués en France pour le bien-être de votre animal</p>
         </div>
 
-        <!-- Horizontal Products View -->
+        <!-- Horizontal Products View - Updated to new card structure -->
         <div class="horizontal-products">
             <!-- Croquettes Allergies - Chien Adulte Moins de 10 kg -->
-            <div class="horizontal-product-card" data-product-id="1">
-                <div class="product-badge">N°1 des ventes</div>
-                <div class="horizontal-product-image">
-                    <img src="2_3d72a29f-2b52-441b-b1e4-fbd29210eb43.webp" alt="Croquettes Allergies">
+            <div class="product-card-v2" data-product-id="1">
+                <div class="product-image-v2">
+                    <a href="#"><img src="2_3d72a29f-2b52-441b-b1e4-fbd29210eb43.webp" alt="Croquettes Allergies - Peau Sensible"></a>
+                    <span class="product-badge-v2 product-badge-sale">N°1 Ventes</span> 
                 </div>
-                <div class="horizontal-product-info">
-                    <div class="horizontal-product-title">Croquettes Allergies - Problèmes de Peau</div>
-                    <div class="horizontal-product-variant">Chien Adulte Moins de 10 kg</div>
-                    <div class="horizontal-product-price">26,80 €</div>
-                    <div class="horizontal-product-actions">
-                        <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Allergies - Peau Sensible</a></h3>
+                    <p class="product-variant-v2">Chien Adulte &lt; 10 kg</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">26,80 €</span>
                     </div>
+                </div>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="1">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Croquettes Allergies - Chien Adulte 10 à 30 kg -->
-            <div class="horizontal-product-card" data-product-id="2">
-                <div class="product-badge secondary">ÉLU PRODUIT DE L'ANNÉE</div>
-                <div class="horizontal-product-image">
-                    <img src="5_b2d1be58-2a51-4455-8004-e3eb633d6133 (1).webp" alt="Croquettes Allergies">
+            <div class="product-card-v2" data-product-id="2">
+                <div class="product-image-v2">
+                    <a href="#"><img src="5_b2d1be58-2a51-4455-8004-e3eb633d6133 (1).webp" alt="Croquettes Allergies - Peau Sensible"></a>
+                    <span class="product-badge-v2 product-badge-highlight">Élu Produit de l'Année</span>
                 </div>
-                <div class="horizontal-product-info">
-                    <div class="horizontal-product-title">Croquettes Allergies - Problèmes de Peau</div>
-                    <div class="horizontal-product-variant">Chien Adulte 10 à 30 kg</div>
-                    <div class="horizontal-product-price">34,80 €</div>
-                    <div class="horizontal-product-actions">
-                        <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Allergies - Peau Sensible</a></h3>
+                    <p class="product-variant-v2">Chien Adulte 10 à 30 kg</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">34,80 €</span>
                     </div>
+                </div>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="2">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Croquettes Allergies - Chien Adulte Plus de 30 kg -->
-            <div class="horizontal-product-card" data-product-id="3">
-                <div class="horizontal-product-image">
-                    <img src="9_a9451d47-8f21-4f33-835e-6df27764cdd6.webp" alt="Croquettes Allergies">
+             <div class="product-card-v2" data-product-id="3">
+                <div class="product-image-v2">
+                    <a href="#"><img src="9_a9451d47-8f21-4f33-835e-6df27764cdd6.webp" alt="Croquettes Allergies"></a>
                 </div>
-                <div class="horizontal-product-info">
-                    <div class="horizontal-product-title">Croquettes Allergies</div>
-                    <div class="horizontal-product-variant">Chien Adulte Plus de 30 kg</div>
-                    <div class="horizontal-product-price">34,80 €</div>
-                    <div class="horizontal-product-actions">
-                        <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Allergies</a></h3>
+                    <p class="product-variant-v2">Chien Adulte &gt; 30 kg</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">34,80 €</span>
                     </div>
+                </div>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="3">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Bâtonnets Dentaires Hypoallergéniques -->
-            <div class="horizontal-product-card" data-product-id="4">
-                <div class="horizontal-product-image">
-                    <img src="Caroussel_photos_pages_produits_-_Batonnets_6_20c662c4-ffce-402d-85dd-e47cc75bcb72.webp" alt="Bâtonnets Dentaires Hypoallergéniques">
+            <div class="product-card-v2" data-product-id="4">
+                <div class="product-image-v2">
+                    <a href="#"><img src="Caroussel_photos_pages_produits_-_Batonnets_6_20c662c4-ffce-402d-85dd-e47cc75bcb72.webp" alt="Bâtonnets Dentaires Hypoallergéniques"></a>
                 </div>
-                <div class="horizontal-product-info">
-                    <div class="horizontal-product-title">Bâtonnets Dentaires Hypoallergéniques</div>
-                    <div class="horizontal-product-variant">Disponible en 2 tailles</div>
-                    <div class="horizontal-product-price">5,90 €</div>
-                    <div class="horizontal-product-actions">
-                        <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Bâtonnets Dentaires Hypoallergéniques</a></h3>
+                    <p class="product-variant-v2">Disponible en 2 tailles</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">5,90 €</span>
                     </div>
+                </div>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="4">Ajouter au panier</button>
                 </div>
             </div>
         </div>
 
-        <!-- Regular Products Grid -->
+        <!-- Regular Products Grid - Updated to new card structure -->
         <div class="products-grid">
             <!-- Croquettes Digestion - Chien Adulte Moins de 10 kg -->
-            <div class="product-card" data-product-id="5">
-                <div class="product-content">
-                    <div class="product-image">
-                        <img src="1_1d5fb572-e824-4a3e-853d-f35ba0423f8a.webp" alt="Croquettes Digestion">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Croquettes Digestion</div>
-                        <h3 class="product-title">croquettes digestion sensible</h3>
-                        <div class="product-variant">Chien Adulte Moins de 10 kg</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>153 avis</span>
-                        </div>
-                        <div class="product-price">24,80 €</div>
+            <div class="product-card-v2" data-product-id="5">
+                <div class="product-image-v2">
+                     <a href="#"><img src="1_1d5fb572-e824-4a3e-853d-f35ba0423f8a.webp" alt="Croquettes Digestion Sensible"></a>
+                </div>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Digestion Sensible</a></h3>
+                    <p class="product-variant-v2">Chien Adulte &lt; 10 kg</p>
+                    <!-- Ratings can be added back if desired, for now simplifying -->
+                    <div class="product-price-v2">
+                        <span class="current-price">24,80 €</span>
                     </div>
                 </div>
-                <div class="product-actions">
-                    <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="5">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Croquettes Digestion - Chien Adulte 10 à 30 kg -->
-            <div class="product-card" data-product-id="6">
-                <div class="product-content">
-                    <div class="product-image">
-                        <img src="2_3d1ff2d0-6259-48aa-98f0-d1b0e2104066.webp" alt="Croquettes Digestion">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Croquettes Digestion</div>
-                        <h3 class="product-title">Croquettes Digestion - Chien Adulte 10 à 30 kg</h3>
-                        <div class="product-variant">Chien Adulte 10 à 30 kg</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>343 avis</span>
-                        </div>
-                        <div class="product-price">31,80 €</div>
+            <div class="product-card-v2" data-product-id="6">
+                <div class="product-image-v2">
+                    <a href="#"><img src="2_3d1ff2d0-6259-48aa-98f0-d1b0e2104066.webp" alt="Croquettes Digestion Sensible"></a>
+                </div>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Digestion Sensible</a></h3>
+                    <p class="product-variant-v2">Chien Adulte 10 à 30 kg</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">31,80 €</span>
                     </div>
                 </div>
-                <div class="product-actions">
-                    <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="6">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Croquettes Digestion - Chien Adulte Plus de 30 kg -->
-            <div class="product-card" data-product-id="7">
-                <div class="product-content">
-                    <div class="product-image">
-                        <img src="3_65ba5ed5-6f65-4390-8fc7-f166a8c2cc91.webp" alt="Croquettes Digestion">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Croquettes Digestion</div>
-                        <h3 class="product-title">Croquettes Digestion - Chien Adulte Plus de 30 kg</h3>
-                        <div class="product-variant">Chien Adulte Plus de 30 kg</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>53 avis</span>
-                        </div>
-                        <div class="product-price">31,80 €</div>
+            <div class="product-card-v2" data-product-id="7">
+                <div class="product-image-v2">
+                    <a href="#"><img src="3_65ba5ed5-6f65-4390-8fc7-f166a8c2cc91.webp" alt="Croquettes Digestion Sensible"></a>
+                </div>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Digestion Sensible</a></h3>
+                    <p class="product-variant-v2">Chien Adulte &gt; 30 kg</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">31,80 €</span>
                     </div>
                 </div>
-                <div class="product-actions">
-                    <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="7">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Croquettes Équilibre - Chien Adulte Moins de 10 kg -->
-            <div class="product-card" data-product-id="8">
-                <div class="product-content">
-                    <div class="product-image">
-                        <img src="3_235dff33-d2e1-45e2-bc59-de894acdbaea.webp" alt="Croquettes Équilibre">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Croquettes Équilibre</div>
-                        <h3 class="product-title">Croquettes Équilibre - Chien Adulte Moins de 10 kg</h3>
-                        <div class="product-variant">Chien Adulte Moins de 10 kg</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>225 avis</span>
-                        </div>
-                        <div class="product-price">23,40 €</div>
+            <div class="product-card-v2" data-product-id="8">
+                <div class="product-image-v2">
+                    <a href="#"><img src="3_235dff33-d2e1-45e2-bc59-de894acdbaea.webp" alt="Croquettes Équilibre"></a>
+                </div>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Équilibre</a></h3>
+                    <p class="product-variant-v2">Chien Adulte &lt; 10 kg</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">23,40 €</span>
                     </div>
                 </div>
-                <div class="product-actions">
-                    <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="8">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Croquettes Équilibre - Chien Adulte 10 à 30 kg -->
-            <div class="product-card" data-product-id="9">
-                <div class="product-content">
-                    <div class="product-image">
-                        <img src="2_5d5733fa-0932-43da-a0da-5ebc4dbf5cc1.webp" alt="Croquettes Équilibre">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Croquettes Équilibre</div>
-                        <h3 class="product-title">Croquettes Équilibre - Chien Adulte 10 à 30 kg</h3>
-                        <div class="product-variant">Chien Adulte 10 à 30 kg</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>543 avis</span>
-                        </div>
-                        <div class="product-price">29,80 €</div>
+            <div class="product-card-v2" data-product-id="9">
+                <div class="product-image-v2">
+                    <a href="#"><img src="2_5d5733fa-0932-43da-a0da-5ebc4dbf5cc1.webp" alt="Croquettes Équilibre"></a>
+                </div>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Équilibre</a></h3>
+                    <p class="product-variant-v2">Chien Adulte 10 à 30 kg</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">29,80 €</span>
                     </div>
                 </div>
-                <div class="product-actions">
-                    <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="9">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Croquettes Équilibre - Chien Adulte Plus de 30 kg -->
-            <div class="product-card" data-product-id="10">
-                <div class="product-content">
-                    <div class="product-image">
-                        <img src="1_8d8dc67d-f22f-4a04-b228-5247a0dad1a6.webp" alt="Croquettes Équilibre">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Croquettes Équilibre</div>
-                        <h3 class="product-title">Croquettes Équilibre - Chien Adulte Plus de 30 kg</h3>
-                        <div class="product-variant">Chien Adulte Plus de 30 kg</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>84 avis</span>
-                        </div>
-                        <div class="product-price">29,80 €</div>
+            <div class="product-card-v2" data-product-id="10">
+                <div class="product-image-v2">
+                    <a href="#"><img src="1_8d8dc67d-f22f-4a04-b228-5247a0dad1a6.webp" alt="Croquettes Équilibre"></a>
+                </div>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Équilibre</a></h3>
+                    <p class="product-variant-v2">Chien Adulte &gt; 30 kg</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">29,80 €</span>
                     </div>
                 </div>
-                <div class="product-actions">
-                    <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="10">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Croquettes chien stérilisé - Chien adulte toutes tailles -->
-            <div class="product-card" data-product-id="11">
-                <div class="product-content">
-                    <div class="product-image">
-                        <img src="1_9727b5a9-3b7f-4230-b280-ca92c2c8f13f.webp" alt="Croquettes chien stérilisé">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Croquettes chien stérilisé</div>
-                        <h3 class="product-title">Croquettes chien stérilisé - Chien adulte toutes tailles</h3>
-                        <div class="product-variant">Chien adulte toutes tailles</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>48 avis</span>
-                        </div>
-                        <div class="product-price">30,80 €</div>
+            <div class="product-card-v2" data-product-id="11">
+                <div class="product-image-v2">
+                    <a href="#"><img src="1_9727b5a9-3b7f-4230-b280-ca92c2c8f13f.webp" alt="Croquettes chien stérilisé"></a>
+                </div>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Chien Stérilisé</a></h3>
+                    <p class="product-variant-v2">Chien adulte toutes tailles</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">30,80 €</span>
                     </div>
                 </div>
-                <div class="product-actions">
-                    <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="11">Ajouter au panier</button>
                 </div>
             </div>
 
             <!-- Croquettes chien senior - À partir de 8 ans -->
-            <div class="product-card" data-product-id="12">
-                <div class="product-content">
-                    <div class="product-image">
-                        <img src="1_87caccd5-6295-481f-ae00-df10d593d45e.webp" alt="Croquettes chien senior">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">Croquettes chien senior</div>
-                        <h3 class="product-title">Croquettes chien senior - À partir de 8 ans</h3>
-                        <div class="product-variant">À partir de 8 ans</div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>24 avis</span>
-                        </div>
-                        <div class="product-price">30,80 €</div>
+            <div class="product-card-v2" data-product-id="12">
+                <div class="product-image-v2">
+                    <a href="#"><img src="1_87caccd5-6295-481f-ae00-df10d593d45e.webp" alt="Croquettes chien senior"></a>
+                </div>
+                <div class="product-info-v2">
+                    <h3 class="product-title-v2"><a href="#">Croquettes Chien Senior</a></h3>
+                    <p class="product-variant-v2">À partir de 8 ans</p>
+                    <div class="product-price-v2">
+                        <span class="current-price">30,80 €</span>
                     </div>
                 </div>
-                <div class="product-actions">
-                    <button class="btn btn-dark add-to-cart">Ajouter au panier</button>
+                <div class="product-actions-v2">
+                    <button class="btn btn-outline add-to-cart" data-product-id="12">Ajouter au panier</button>
                 </div>
             </div>
         </div>
@@ -473,216 +384,149 @@
     </section>
 
     <!-- Categories Section -->
-    <section class="categories main-page-section">
+    <section class="category-showcase-v2">
         <div class="container">
-            <div class="section-title">
-                <h2>Nos catégories de produits</h2>
-                <p>Trouvez les produits adaptés aux < besoins spécifiques de votre chien</p>
+            <div class="section-header-v2">
+                <h2>Explorer par catégorie</h2>
+                <p>Trouvez exactement ce dont votre chien a besoin.</p>
             </div>
-
-            <div class="categories-grid">
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-paw"></i>
-                    </div>
-                    <h3 class="category-title">Croquettes hypoallergéniques</h3>
-                    <div class="category-count">8 produits</div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-bone"></i>
-                    </div>
-                    <h3 class="category-title">Croquettes sans viande</h3>
-                    <div class="category-count">5 produits</div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-dog"></i>
-                    </div>
-                    <h3 class="category-title">Croquettes chiot</h3>
-                    <div class="category-count">3 produits</div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h3 class="category-title">Croquettes chien stérilisé</h3>
-                    <div class="category-count">2 produits</div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-weight"></i>
-                    </div>
-                    <h3 class="category-title">Croquettes chien surpoids</h3>
-                    <div class="category-count">3 produits</div>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-grin"></i>
-                    </div>
-                    <h3 class="category-title">Bâtonnets dentaires</h3>
-                    <div class="category-count">4 produits</div>
-                </div>
+            <div class="category-grid-v2">
+                <a href="#" class="category-item-v2">
+                    <div class="category-item-icon-v2"><i class="fas fa-paw"></i></div>
+                    <h3 class="category-item-title-v2">Hypoallergénique</h3>
+                    <p class="category-item-count-v2">8 produits</p>
+                </a>
+                <a href="#" class="category-item-v2">
+                    <div class="category-item-icon-v2"><i class="fas fa-bone"></i></div>
+                    <h3 class="category-item-title-v2">Sans Viande</h3>
+                    <p class="category-item-count-v2">5 produits</p>
+                </a>
+                <a href="#" class="category-item-v2">
+                    <div class="category-item-icon-v2"><i class="fas fa-dog"></i></div>
+                    <h3 class="category-item-title-v2">Chiot</h3>
+                    <p class="category-item-count-v2">3 produits</p>
+                </a>
+                <a href="#" class="category-item-v2">
+                    <div class="category-item-icon-v2"><i class="fas fa-heart"></i></div>
+                    <h3 class="category-item-title-v2">Stérilisé</h3>
+                    <p class="category-item-count-v2">2 produits</p>
+                </a>
+                <a href="#" class="category-item-v2">
+                    <div class="category-item-icon-v2"><i class="fas fa-weight"></i></div>
+                    <h3 class="category-item-title-v2">Surpoids</h3>
+                    <p class="category-item-count-v2">3 produits</p>
+                </a>
+                <a href="#" class="category-item-v2">
+                    <div class="category-item-icon-v2"><i class="fas fa-grin"></i></div>
+                    <h3 class="category-item-title-v2">Bâtonnets Dentaires</h3>
+                    <p class="category-item-count-v2">4 produits</p>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features container main-page-section">
-        <div class="section-title">
-            <h2>Pourquoi choisir réglo ?</h2>
-            <p>Nous nous engageons à fournir les meilleurs produits pour votre animal</p>
-        </div>
-
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <h3 class="feature-title">Fabriqué en France</h3>
-                <p class="feature-desc">Tous nos produits sont fabriqués en France avec des ingrédients de qualité</p>
+    <section class="site-features-v2">
+        <div class="container">
+            <div class="section-header-v2">
+                <h2>Pourquoi nous choisir ?</h2>
+                <p>Qualité et engagement pour le bien-être de votre animal.</p>
             </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-leaf"></i>
+            <div class="features-grid-v2">
+                <div class="feature-item-v2">
+                    <div class="feature-item-icon-v2"><i class="fas fa-check-circle"></i></div>
+                    <h3 class="feature-item-title-v2">Fabriqué en France</h3>
+                    <p class="feature-item-desc-v2">Ingrédients de qualité, production locale.</p>
                 </div>
-                <h3 class="feature-title">Naturel et sain</h3>
-                <p class="feature-desc">Des formulations naturelles sans ingrédients controversés</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-heartbeat"></i>
+                <div class="feature-item-v2">
+                    <div class="feature-item-icon-v2"><i class="fas fa-leaf"></i></div>
+                    <h3 class="feature-item-title-v2">Naturel et Sain</h3>
+                    <p class="feature-item-desc-v2">Formulations naturelles sans ingrédients controversés.</p>
                 </div>
-                <h3 class="feature-title">Formulé par des experts</h3>
-                <p class="feature-desc">Nos produits sont développés avec des vétérinaires et nutritionnistes</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-truck"></i>
+                <div class="feature-item-v2">
+                    <div class="feature-item-icon-v2"><i class="fas fa-heartbeat"></i></div>
+                    <h3 class="feature-item-title-v2">Formulé par Experts</h3>
+                    <p class="feature-item-desc-v2">Développé avec des vétérinaires et nutritionnistes.</p>
                 </div>
-                <h3 class="feature-title">Livraison rapide</h3>
-                <p class="feature-desc">Livraison offerte à partir de 40€ d'achat</p>
+                <div class="feature-item-v2">
+                    <div class="feature-item-icon-v2"><i class="fas fa-truck"></i></div>
+                    <h3 class="feature-item-title-v2">Livraison Rapide</h3>
+                    <p class="feature-item-desc-v2">Offerte à partir de 40€ d'achat.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials main-page-section">
+    <section class="customer-testimonials-v2">
         <div class="container">
-            <div class="section-title">
-                <h2>Ce que disent nos clients</h2>
-                <p>Découvrez les retours de nos clients satisfaits</p>
+            <div class="section-header-v2">
+                <h2>Nos clients témoignent</h2>
             </div>
-
-            <div class="testimonials-slider">
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "Mon chien souffrait d'allergies depuis des années. Après avoir essayé les croquettes réglo, ses problèmes de peau ont complètement disparu en 3 semaines seulement !"
-                    </p>
-                    <p class="testimonial-author">- Sophie D., Paris</p>
+            <div class="testimonial-slider-v2"> <!-- Basic structure, actual slider JS might be complex -->
+                <div class="testimonial-item-v2">
+                    <div class="testimonial-rating-v2">★★★★★</div> <!-- Simple text stars for now -->
+                    <p class="testimonial-text-v2">"Mon chien adore ! Ses problèmes de peau ont disparu."</p>
+                    <p class="testimonial-author-v2">- Sophie D., Paris</p>
+                </div>
+                <div class="testimonial-item-v2">
+                    <div class="testimonial-rating-v2">★★★★☆</div>
+                    <p class="testimonial-text-v2">"Très satisfaite de la qualité, et la livraison est rapide."</p>
+                    <p class="testimonial-author-v2">- Marc L., Lyon</p>
+                </div>
+                <!-- Add a third testimonial for better grid display if static -->
+                <div class="testimonial-item-v2">
+                    <div class="testimonial-rating-v2">★★★★★</div>
+                    <p class="testimonial-text-v2">"Enfin des croquettes que mon chien digère bien. Je recommande !"</p>
+                    <p class="testimonial-author-v2">- Hélène P., Marseille</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Newsletter Section -->
-    <section class="newsletter main-page-section">
+    <section class="newsletter-signup-v2">
         <div class="container">
-            <h2>Abonnez-vous à notre newsletter</h2>
-            <p>Recevez des conseils, offres exclusives et 10% de réduction sur votre première commande</p>
-            <form class="newsletter-form">
+            <h2>Restons en contact</h2>
+            <p>Abonnez-vous pour recevoir nos conseils et offres exclusives.</p>
+            <form class="newsletter-form-v2">
                 <input type="email" placeholder="Votre adresse email" required>
-                <button type="submit">S'ABONNER</button>
+                <button type="submit" class="btn btn-primary">S'abonner</button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="site-footer-v2">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>Pour chien</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Croquettes hypoallergéniques</a></li>
-                        <li><a href="#">Croquettes sans viande</a></li>
-                        <li><a href="#">Croquettes chiot</a></li>
-                        <li><a href="#">Croquettes chien stérilisé</a></li>
-                        <li><a href="#">Croquettes chien surpoids</a></li>
-                        <li><a href="#">Croquettes chien senior</a></li>
-                        <li><a href="#">Bâtonnets dentaires</a></li>
-                        <li><a href="#">Huile de chanvre</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Bien choisir</h3>
-                    <ul class="footer-links">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>À propos</h4>
+                    <ul>
                         <li><a href="#">Notre mission</a></li>
-                        <li><a href="#">Pourquoi les insectes ?</a></li>
-                        <li><a href="#">Guide croquette</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Ils parlent de nous</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">France 5</a></li>
-                        <li><a href="#">Les Echos</a></li>
-                        <li><a href="#">Libération</a></li>
-                        <li><a href="#">Ouest France</a></li>
-                        <li><a href="#">Le Bonbon</a></li>
-                        <li><a href="#">Le Parisien</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h3>Informations pratiques</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Compte client</a></li>
-                        <li><a href="#">Abonnement</a></li>
-                        <li><a href="#">Avis clients</a></li>
+                        <li><a href="#">Nos engagements</a></li>
                         <li><a href="#">Blog</a></li>
-                        <li><a href="#">Recrutement</a></li>
-                        <li><a href="#">Demandes presse</a></li>
-                        <li><a href="javascript:void(0);" id="footer-cgv-link">C.G.V</a></li>
-                        <li><a href="javascript:void(0);" id="footer-privacy-link">Politique de confidentialité</a></li>
-                        <li><a href="#">Mentions légales</a></li>
                     </ul>
                 </div>
-
-                <div class="footer-col">
-                    <h3>Contact</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-envelope"></i> bonjour@reglo.fr</li>
-                        <li><i class="fas fa-phone"></i> 01 87 20 02 40</li>
-                        <li><i class="fas fa-map-marker-alt"></i> 12 rue Blanche 75009 Paris</li>
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contactez-nous</a></li>
+                        <li><a href="javascript:void(0);" class="legal-link" data-type="terms">CGV</a></li>
+                        <li><a href="javascript:void(0);" class="legal-link" data-type="privacy">Confidentialité</a></li>
                     </ul>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div class="footer-column">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links-v2">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
-
-            <div class="footer-bottom">
-                <p>© 2023 réglo. Tous droits réservés.</p>
+            <div class="footer-bottom-v2">
+                <p>&copy; 2024 réglo. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
