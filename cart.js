@@ -182,8 +182,11 @@ class Cart {
     }
     
     renderCartCount() {
-        const cartCountElement = document.getElementById('cart-count');
-        if (!cartCountElement) return;
+        const cartCountElement = document.getElementById('cart-count-header'); 
+        if (!cartCountElement) {
+            // console.warn("Cart count element #cart-count-header not found.");
+            return;
+        }
         
         cartCountElement.textContent = this.itemCount;
         
@@ -195,10 +198,23 @@ class Cart {
     }
     
     showAddToCartFeedback() {
-        const cartIcon = document.getElementById('cart-icon');
+        const cartIcon = document.getElementById('cart-icon-header'); 
         if (cartIcon) {
-            cartIcon.classList.add('animate');
-            setTimeout(() => cartIcon.classList.remove('animate'), 1000);
+            // The 'animate' class and associated @keyframes bounce are in style.css
+            // and targeted #cart-icon.animate i. We need to ensure this still works
+            // or adapt the animation CSS if #cart-icon-header structure is different.
+            // For now, assuming the animation might need review if not working with new ID.
+            const iconElement = cartIcon.querySelector('i'); // If animation targets the <i>
+            if (iconElement) {
+                 iconElement.classList.add('animate-bounce-icon'); // Using a more specific class for clarity
+                 setTimeout(() => iconElement.classList.remove('animate-bounce-icon'), 800);
+            } else { // Fallback if direct icon animation is not set up
+                 cartIcon.classList.add('animate');
+                 setTimeout(() => cartIcon.classList.remove('animate'), 1000);
+            }
+        } else {
+            // console.warn("Cart icon element #cart-icon-header not found for feedback.");
+        }
         }
     }
     
@@ -223,32 +239,45 @@ document.addEventListener('DOMContentLoaded', function() {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                const productCard = this.closest('.product-card, .horizontal-product-card');
-                if (!productCard) return;
-                
-                const productId = productCard.dataset.productId;
-                const productNameElement = productCard.querySelector('.product-title, .horizontal-product-title');
-                const productVariantElement = productCard.querySelector('.product-variant, .horizontal-product-variant');
-                const productPriceElement = productCard.querySelector('.product-price, .horizontal-product-price');
-                const productImageElement = productCard.querySelector('.product-image img, .horizontal-product-image img');
-                
-                if (!productId || !productNameElement || !productVariantElement || !productPriceElement || !productImageElement) {
-                    console.error("Missing product data for add to cart.", productCard);
+                const productCard = this.closest('.product-card-v2'); 
+                if (!productCard) {
+                    console.error("Could not find .product-card-v2 for button:", this);
                     return;
                 }
                 
-                const productName = productNameElement.textContent;
-                const productVariant = productVariantElement.textContent;
-                const priceText = productPriceElement.textContent;
-                const numericPrice = priceText.replace(/[^\d,]/g, '').replace(',', '.');
-                const productPrice = parseFloat(numericPrice) || 0;
+                const productId = productCard.dataset.productId;
+                const productNameElement = productCard.querySelector('.product-title-v2 a'); 
+                const productVariantElement = productCard.querySelector('.product-variant-v2');
+                const productPriceElement = productCard.querySelector('.product-price-v2 .current-price');
+                const productImageElement = productCard.querySelector('.product-image-v2 img');
+                
+                if (!productId || !productNameElement || !productVariantElement || !productPriceElement || !productImageElement) {
+                    console.error("Missing product data elements for add to cart within .product-card-v2:", productCard);
+                    // Log which specific element is missing if possible
+                    if(!productId) console.error("Missing: productId");
+                    if(!productNameElement) console.error("Missing: productNameElement");
+                    if(!productVariantElement) console.error("Missing: productVariantElement");
+                    if(!productPriceElement) console.error("Missing: productPriceElement");
+                    if(!productImageElement) console.error("Missing: productImageElement");
+                    return;
+                }
+                
+                const productName = productNameElement.textContent.trim();
+                const productVariant = productVariantElement.textContent.trim();
+                const priceText = productPriceElement.textContent.trim();
+                const numericPrice = parseFloat(priceText.replace(/[^\d,.]/g, '').replace(',', '.'));
                 const productImage = productImageElement.src;
                 
+                if (isNaN(numericPrice)) {
+                    console.error("Could not parse price for product:", productName, priceText);
+                    return;
+                }
+
                 cart.addItem({
                     id: productId,
                     name: productName,
                     variant: productVariant,
-                    price: productPrice,
+                    price: numericPrice, 
                     image: productImage
                 });
                 
@@ -266,37 +295,37 @@ document.addEventListener('DOMContentLoaded', function() {
     setupAddToCartButtons();
 
     // Cart sidebar functionality (opening, closing)
-    const cartIcon = document.getElementById('cart-icon');
+    const cartIconHeader = document.getElementById('cart-icon-header'); 
     const cartSidebar = document.querySelector('.cart-sidebar');
     const closeCartBtn = document.querySelector('.close-cart');
     const cartOverlay = document.querySelector('.cart-overlay');
     
-    if (cartIcon && cartSidebar && closeCartBtn && cartOverlay) {
-        cartIcon.addEventListener('click', function(e) {
+    if (cartIconHeader && cartSidebar && closeCartBtn && cartOverlay) {
+        cartIconHeader.addEventListener('click', function(e) {
             e.preventDefault();
             cartSidebar.classList.add('active');
             cartOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-            cart.renderCartUI(); // Re-render cart UI when opening
+            cart.renderCartUI(); 
         });
         
         closeCartBtn.addEventListener('click', () => {
             cartSidebar.classList.remove('active');
-            // Only deactivate overlay and restore scroll if mobile menu is also not active
-            const mobileMenu = document.querySelector('.mobile-menu');
-            if (!mobileMenu || !mobileMenu.classList.contains('active')) {
+            const mobileNavMenu = document.querySelector('.mobile-nav-menu'); 
+            if (!mobileNavMenu || !mobileNavMenu.classList.contains('active')) {
                  cartOverlay.classList.remove('active');
                  document.body.style.overflow = '';
             }
         });
         
-        // Overlay click handles both cart and mobile menu
         cartOverlay.addEventListener('click', () => {
-            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileNavMenu = document.querySelector('.mobile-nav-menu'); 
             let wasActive = false;
 
-            if (mobileMenu && mobileMenu.classList.contains('active')) {
-                mobileMenu.classList.remove('active');
+            if (mobileNavMenu && mobileNavMenu.classList.contains('active')) {
+                mobileNavMenu.classList.remove('active');
+                const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+                if (mobileMenuToggle) mobileMenuToggle.setAttribute('aria-expanded', 'false');
                 wasActive = true;
             }
             if (cartSidebar && cartSidebar.classList.contains('active')) {
